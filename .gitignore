@@ -1,0 +1,6 @@
+.babysit/.env
+.babysit/qa.local.yaml
+.babysit/worktrees/
+.babysit/review-reports/
+.2server/
+server.local.json

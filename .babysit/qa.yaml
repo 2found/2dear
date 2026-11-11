@@ -1,0 +1,19 @@
+version: 1
+# Primary local target: the 2dear web app. Start the api too for flows that call it.
+url: http://localhost:3420
+start: cd web && pnpm dev
+check: cd api && bun run typecheck && bun run test && bun run build && cd ../web && pnpm run lint && pnpm run typecheck && pnpm test && pnpm run build
+# One line on purpose: `bbs secrets qa` reads scalars line by line.
+flows: web / renders the 2dear home with no console errors at 390px and 1440px without horizontal scroll; web /missing returns 404 with the Vietnamese not-found page and a working "Về trang chủ" button; api GET http://localhost:8120/readyz returns 200; api unknown route returns 404 with the error envelope and request ID (non-happy path).
+services:
+  api:
+    dir: api
+    runtime: bun
+    dev: bun run dev  # PORT=8120
+    check: bun run typecheck && bun run test && bun run build
+  web:
+    dir: web
+    runtime: pnpm
+    dev: pnpm dev  # PORT=3420
+    check: pnpm run lint && pnpm run typecheck && pnpm test && pnpm run build
+notes: No login exists yet. Rules in AGENTS.md; system architecture in docs/ARCHITECTURE.md; visuals in web/DESIGN.md.

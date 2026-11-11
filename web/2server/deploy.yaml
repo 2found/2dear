@@ -1,0 +1,38 @@
+# dear-web production App (2server). Runbook: ../../RELEASE.md. Owns the public
+# domain; /api is stripped and routed to dear-api on the same VM.
+# TODO(2build): confirm the 2dear.app Cloudflare zone is Active and the VM token
+# covers it before the first `2srv plan` — founder.
+apiVersion: 2server.app/v1
+kind: App
+metadata:
+  name: dear-web
+spec:
+  kind: service
+  image: asia-southeast1-docker.pkg.dev/lohi-dev-lohi/docker/dear-web:latest
+  replicas: 1
+  port: 8080
+  healthPath: /
+  memoryMb: 384
+  cpus: 0.5
+  env:
+    NODE_ENV: production
+    PORT: "8080"
+    HOSTNAME: 0.0.0.0
+    API_URL: https://2dear.app/api
+domains:
+  - name: two-dear
+    zone: 2dear.app
+    hosts:
+      - 2dear.app
+      - www.2dear.app
+    routes:
+      - prefix: /api
+        strip: true
+        upstream:
+          kind: import
+          name: up_prod-dear-api
+    upstream:
+      kind: import
+      name: up_prod-dear-web
+    adoptDns: true
+    requireAuth: false

@@ -1,0 +1,106 @@
+@import "tailwindcss";
+@import "@tofound/ui/styles.css";
+@import "tw-animate-css";
+@custom-variant dark (&:is(.dark *));
+
+/* 2dear host theme for 2ui — the only place a color, radius or font is defined.
+   2ui owns components and interaction states; this host owns brand colour, fonts
+   and radius (2ui UI_GUIDE "Install and theme contract"). Values come from the
+   approved prototype (docs/2dear/prototype/src/styles/theme.css). Light only for
+   the MVP; read DESIGN.md before changing them. */
+@theme inline {
+  --color-brand-25: #fff7f8;
+  --color-brand-50: #fdeef0;
+  --color-brand-100: #fbdadf;
+  --color-brand-200: #f5b3bd;
+  --color-brand-300: #ec8593;
+  --color-brand-400: #e05669;
+  --color-brand-500: #c8213a;
+  --color-brand-600: #ab1a31;
+  --color-brand-700: #8c1528;
+  --color-brand-800: #6c1120;
+  --color-brand-900: #3d0812;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface-0: var(--surface-0);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+
+  /* 2dear accents beyond the 2ui vocabulary (letter themes, illustration). */
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--foreground);
+  --color-ink-2: var(--muted-foreground);
+  --color-ink-3: var(--ink-3);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* next/font variables are set on <html> in app/layout.tsx. */
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #141416;
+  --card: #ffffff;
+  --card-foreground: #141416;
+  --popover: #ffffff;
+  --popover-foreground: #141416;
+  --primary: #c8213a;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f3f1;
+  --secondary-foreground: #141416;
+  --muted: #f4f3f1;
+  --muted-foreground: #5f5f66; /* 6.3:1 on white */
+  --accent: #fdeef0;
+  --accent-foreground: #8c1528;
+  --destructive: #c4283a;
+  --destructive-foreground: #ffffff;
+  --border: rgba(17, 17, 20, 0.08);
+  --input: rgba(17, 17, 20, 0.16);
+  --ring: #c8213a;
+  --radius: 0.875rem;
+
+  --surface-0: #ffffff;
+  --surface-1: #ffffff;
+  --surface-2: #f6f5f3;
+  --surface-3: #ecebe8;
+
+  --paper: #f7f5f1;
+  --paper-2: #efece6;
+  --ink-3: #8a8a91;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--foreground);
+  background: var(--background);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { letter-spacing: -0.022em; }

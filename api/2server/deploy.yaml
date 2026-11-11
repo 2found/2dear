@@ -1,0 +1,30 @@
+# dear-api production App (2server). Runbook: ../../RELEASE.md. Secret values
+# live in VM control state, never here. Served under https://2dear.app/api by
+# the dear-web domain route (one origin, no CORS).
+# Database `dear` on the shared platform Postgres (docs/ARCHITECTURE.md D3).
+# TODO(2build): add `spec.preDeploy` (Drizzle migrate with secret
+# MIGRATION_DATABASE_URL as DATABASE_URL) when the first migration lands.
+apiVersion: 2server.app/v1
+metadata:
+  name: dear-api
+requires:
+  - kind: App
+    name: postgres
+kind: App
+spec:
+  kind: service
+  image: asia-southeast1-docker.pkg.dev/lohi-dev-lohi/docker/dear-api:latest
+  replicas: 1
+  port: 8080
+  healthPath: /readyz
+  edgeHealthPath: /healthz
+  memoryMb: 256
+  cpus: 0.5
+  env:
+    NODE_ENV: production
+    PORT: "8080"
+  secrets:
+    DATABASE_URL:
+      provider: vm
+      key: DATABASE_URL
+domains: []

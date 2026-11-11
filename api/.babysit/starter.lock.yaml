@@ -1,0 +1,6 @@
+schema_version: 1
+source: 2found/2build-starters
+release: 0.2.0
+template: hono-bun
+template_revision: 2
+revision: 43abf579c489b9d0601970757f54231a030629c6
